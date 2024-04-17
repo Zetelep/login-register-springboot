@@ -1,7 +1,6 @@
 package loginregister.user.data;
 
 import jakarta.persistence.*;
-import loginregister.user.data.UserRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,31 +31,28 @@ public class Users implements UserDetails {
     )
     private Long id;
 
-    private String name;
-    private String username;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    private Boolean locked;
-    private Boolean enabled;
+    private Boolean locked =false;
+    private Boolean enabled = false;
 
-    public Users(String name,
-                String username,
+    public Users(String firstName,
+                String lastName,
                 String email,
                 String password,
-                UserRole userRole,
-                Boolean locked,
-                Boolean enabled) {
-        this.name = name;
-        this.username = username;
+                UserRole userRole
+) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.userRole = userRole;
-        this.locked = locked;
-        this.enabled = enabled;
     }
 
     @Override
@@ -72,7 +68,7 @@ public class Users implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package loginregister.security;
+package loginregister.security.config;
 
 
 import loginregister.user.service.UserService;
@@ -22,11 +22,7 @@ public class WebSecurityConfig{
 
     private final UserService userService;
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,10 +32,11 @@ public class WebSecurityConfig{
                         auth -> auth.requestMatchers("/registration").permitAll()
                                 .requestMatchers("/registration/**").permitAll().anyRequest()
                                 .authenticated()
-                ).formLogin(config ->
-                        config.loginPage("/login")
-                        //TODO : buat login form
                 )
+//                .formLogin(config ->
+//                        config.loginPage("/login")
+//                        //TODO : buat login form
+//                )
 
                 .build();
     }
@@ -54,7 +51,7 @@ public class WebSecurityConfig{
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
         authProvider.setUserDetailsService(userService);
-        authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setPasswordEncoder(bCryptPasswordEncoder);
 
         return authProvider;
     }
