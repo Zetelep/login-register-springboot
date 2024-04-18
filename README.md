@@ -29,5 +29,5 @@ and the data will be stored in database.
 * Java Mail Sender (for next feature)
 
 ## To Do Next
-* Adding Email Verification(with token) using Java Mail Token
+* Adding Email Verification(with token) using Java Mail Sender
 * Adding simple UI using Thymeleaf
