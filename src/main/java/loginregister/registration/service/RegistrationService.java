@@ -1,19 +1,19 @@
 package loginregister.registration.service;
 
-import loginregister.registration.validator.EmailValidator;
+
 import loginregister.user.data.UserRole;
 import loginregister.user.data.Users;
 import loginregister.user.service.UserService;
 import lombok.AllArgsConstructor;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class RegistrationService {
     private final UserService userService;
-    private final EmailValidator emailValidator;
     public  String register(RegistrationRequest request){
-        boolean isValidEmail = emailValidator.test(request.getEmail());
+        boolean isValidEmail = EmailValidator.getInstance().isValid(request.getEmail());
         if (!isValidEmail) {
             throw new IllegalStateException("Email not valid!");
         }
